@@ -1,0 +1,62 @@
+{% extends 'book/basic.html'%}
+
+{% block title%}BOOK ISSUE MASTER{% endblock%}
+{%block body%} 
+<form action="" method="POST">
+  <div style="padding-bottom: 56px;">
+<div class="row">
+    <div class="col-sm-12">
+        <h3 style="background-color:#ff9800 "> Students Details </h3>
+        {% csrf_token %}
+        {{bookdetails.as_p}}
+        <u style="padding-left:50%;color:blue;"><input type="submit" value="INSERT">
+</u>
+        
+    </div>
+    </div>
+    </div>
+  </form>
+    <br>
+
+
+    <form action="{%  url 'booksalldetails' %}" method="POST">
+      {% csrf_token %}
+      <br>
+<u style="padding-left:50%;color:green;"><input type="submit" value="SAVE"></u></form>
+<div >
+<h3 style="background-color:#f17c2d;">List of Purchase Details</h3>
+ {% if  detailsdata %}
+
+    <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Student Name</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Issued Date</th>
+            <th scope="col">Return Date</th>
+            <th scope="col">Fine Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for x in detailsdata %}
+          <tr>
+            <td>{{x.b_is_id}}</td>
+            <td>{{x.b_m_id}}</td>
+            <td>{{x.is_upto}}</td> 
+            <td>{{x.re_date}}</td> 
+            <td>{{x.fine}}</td> 
+            <td>      
+  {% comment %} <td><a href=""><input type="button" value="Edit"></a> {% endcomment %}
+  <form action="{% url 'deletebookd' x.id %}" method="POST" class="d-inline">
+  {% csrf_token %}
+  <input type="submit" value="delete">
+  </td>
+  </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+
+        {% endif %}
+        </div>
+</div>
+ {% endblock%}

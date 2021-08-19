@@ -1,0 +1,40 @@
+{% extends 'book/basic.html'%}
+
+{% block title%}library{% endblock%}
+{%block body%}
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+          <th scope="col">student name</th>
+          <th scope="col">book name</th>
+          <th scope="col">issued date</th>
+          <th scope="col">retun date</th>
+          <th scope="col">fine</th> 
+          <th scope="col">retun update date</th>
+          
+          <th scope="col">return</th>
+
+        </tr>
+      </thead>
+      <tbody>
+          {% for x in s %}
+        <tr>
+          
+          <td>{{x.std_name}}</td>
+          <td>{{x.bookname}}</td>
+          <td>{{x.iss_date}}</td>
+          <td> {{x.re_date}} </td>
+          <td>{{x.fine}}</td>
+          <form method="POST" action="/returnupdate/{{x.id}}">
+            {% csrf_token %}
+          <td><input type="date" name="date" value="date"></td>
+         
+          <td><input type="submit" value="return"></td></form>
+          {% endfor%}
+        
+</table>
+
+
+
+{% endblock%}

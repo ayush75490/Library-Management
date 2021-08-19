@@ -1,0 +1,71 @@
+{% extends 'book/basic.html'%}
+
+{% block title%}BOOK ISSUE MASTER{% endblock%}
+{%block body%} 
+<form action="" method="POST">
+  <div style="padding-bottom: 56px;">
+    <div class="row">
+       <div class="col-sm-12">
+         <h3 style="background-color:#ff9800 "> Students Details </h3>
+            {% csrf_token %}
+            {{all.as_p}}
+            <u style="padding-left:50%;color:blue;"><input type="submit" value="INSERT"></u>
+
+        
+        </div>
+    </div>
+  </div>
+</form>
+    <br>
+      <form action="/saveoverall/" method="POST">
+        {% csrf_token %}
+         <div >
+             <h3 style="background-color:#f17c2d;">List of Book Details</h3>
+                {% if  showall %}
+
+                <table class="table table-hover">
+                    <thead>
+                       <tr>
+                          <th scope="col">Std Name</th>
+                          <th scope="col">Book Name</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Delete</th>
+                        </tr>
+                    </thead>
+                           <tbody>
+                              {% for x in showall %}
+                            <tr>
+                              <td><input type="text" name="" value="{{x.s_name}}" readonly></td>
+                              <td><input type="text" name="" value="{{x.bk_name}}" readonly></td>
+                              <td><input type="text" name="" value="{{x.date}}" readonly></td> 
+                              <td>      
+                              <form action="/delete_overall/{{x.id}}" method="POST" class="d-inline">
+                              {% csrf_token %}
+                              <input type="submit" value="delete"></form>
+                              </td>
+                            </tr>
+                              {% endfor %}
+                            <tr>
+                               <td>
+                                  <center>
+                                      <br>
+                                 <h1>Total Book</h1><input type="text" name="total" value="{{gamount.total__sum}}" readonly><br>
+                                 <u style="padding-left:50%;color:green;"><input type="submit" value="SAVE"></u></form>
+         </center>
+ 
+                                 </td>
+                            </tr>
+                           </tbody>
+                </table>
+    
+
+                             {% endif %}
+
+
+        </div>
+
+
+                
+                
+
+{% endblock%}

@@ -1,0 +1,54 @@
+{% extends 'book/basic.html'%}
+
+{% block title%}library{% endblock%}
+{%block body%}
+   <form method="POST">
+   {%csrf_token%}
+    From:<input type="date" name="fromdate" required>
+    To:<input type="date" name="todate" required>
+       <input type="submit" name="search" value="search">
+    <hr>
+   <div class="container-fluid"><div class="row"><div class="col-md-6">
+   <table class="table table-bordered" >
+    <tr >
+      <th style="text-align: center;">student</th>
+      <th style="text-align: center;">book name</th>
+      <th style="text-align: center;">date</th>
+    </tr>
+    {% for result in data %}
+    <tr style="text-align: center;">
+      <td>{{result.std_name}}</td>
+      <td>{{result.bookname}}</td>
+      <td>{{result.iss_date}}</td>
+    </tr>
+      {%endfor%}
+  </table></div></div></div>
+  
+   </form>
+  {% endblock%}
+<!-- <script>
+  $(document).ready(function(){ 
+    (function() {
+      $("table").on("chnage", "tr", function() {
+        var row = $(this).closest("tr");
+        var qty = parseFloat(row.find(".qty").val());
+        var pqty = parseFloat(row.find(".pqty").val());
+        var total = qty - pqty;
+        row.find(".total").val(isNaN(total) ? "" : total);          
+      });
+    })();
+    // for total
+    });
+  </script> -->
+  <!-- <script>
+  $('document').ready(function(){
+  $('#quant').load(function(){
+    var qty = $('#qty').val();
+    var pqty =$('#pqty').val();
+    var total=qty-pqty;
+    $('#total').val(qty-pqty);
+    console.log(total)
+
+})
+});
+  </script> -->

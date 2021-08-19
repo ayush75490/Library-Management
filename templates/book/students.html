@@ -1,0 +1,63 @@
+{% extends 'book/basic.html'%}
+
+{% block title%}STUDENT{% endblock%}
+{%block body%}
+<form action="" method="POST">
+  <div style="padding-bottom: 56px;">
+<div class="row">
+    <div class="col-sm-12">
+        <h3 style="background-color:#ff9800 "> Students Details </h3>
+        {% csrf_token %}
+        {{itemforms.as_p}}
+        <input type="submit" value="submit">
+        </form>
+    </div>
+    </div>
+    </div>
+
+    <div class="col-sm-12">
+        <h3 style="background-color:#f17c2d;">All Students</h3>
+        {% if  showdata  %}
+
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Roll</th>
+                <th scope="col">F_name</th>
+                <th scope="col">M_name</th>
+                <th scope="col">Mobile</th>
+                <th scope="col">Email</th>
+                <th scope="col">Age</th>
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for x in showdata %}
+              <tr>
+                <td>{{x.name}}</td>
+                <td>{{x.roll}}</td>
+                <td>{{x.f_name}}</td>
+                <td>{{x.m_name}}</td>
+                <td>{{x.mobile}}</td>
+                <td>{{x.email}}</td>
+                <td>{{x.age}}</td>
+                <td>
+                    <form action="{% url 'deletestd' x.id %}" method="POST" class="d-inline">
+                        {% csrf_token %}
+                        <input type="submit"  value="Delete">
+                    </form>
+
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% endif %}
+        </div>
+</div>
+
+
+
+ {% endblock%}
